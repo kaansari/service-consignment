@@ -30,3 +30,23 @@ func (s *ShippingService) CreateConsignment(ctx context.Context, req *pb.Consign
 	// protobuf definition.
 	return &pb.Response{Created: true, Consignment: consignment}, nil
 }
+
+func (s *ShippingService) GetConsignments(ctx context.Context, req *pb.GetRequest) (*pb.Response, error) {
+
+	res := pb.Response{}
+	res.Consignments = s.Repo.GetAll()
+	return &res, nil
+}
+
+func (s *ShippingService) GetConsignment(ctx context.Context, req *pb.Consignment) (*pb.Response, error) {
+
+	// Save our consignment
+	consignment, err := s.Repo.Get(req)
+	if err != nil {
+		return nil, err
+	}
+
+	// Return matching the `Response` message we created in our
+	// protobuf definition.
+	return &pb.Response{Created: true, Consignment: consignment}, nil
+}
