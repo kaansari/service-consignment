@@ -8,7 +8,7 @@ build-docker:
 
 
 run:
-	docker run -p 50051:50051 \
+	docker run -d -p 50051:50051 \
 		-e DB_HOST=localhost \
 		-e DB_PASS=password \
 		-e DB_USER=postgres \
